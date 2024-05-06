@@ -11,5 +11,4 @@ export default class Produto {
     public get getNome(): string {return this.nome}
     public get getTipo(): string {return this.tipo}
     public get getValor(): string {return this.valor}
-
 }
