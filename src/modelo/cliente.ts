@@ -8,7 +8,7 @@ import Telefone from "./telefone"
 export default class Cliente {
     public nome: string
     public nomeSocial: string
-    private cpf: CPF
+    public cpf: CPF
     private rgs: Array<RG>
     private dataCadastro: Date
     private telefones: Array<Telefone>
