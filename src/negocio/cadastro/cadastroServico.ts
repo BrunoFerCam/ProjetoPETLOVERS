@@ -17,6 +17,6 @@ export default class CadastroServico extends Cadastro {
         let valor = this.entrada.entTexto(`Por favor informe o valor do serviço: `);
         let servico = new Servico(nome, tipo, valor);
         this.servicos.push(servico)
-        console.log(`\nCadastro concluído :)\n`);
+        console.log(`\nCadastro concluído.\n`);
     }
 }

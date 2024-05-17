@@ -13,10 +13,18 @@ export default class CadastroProduto extends Cadastro {
     public cadastrar(): void {
         console.log(`\nInício do cadastro do produto`);
         let nome = this.entrada.entTexto(`Por favor informe o nome do produto: `)
-        let tipo = this.entrada.entTexto(`Por favor informe o tipo do produto: `)
-        let valor = this.entrada.entTexto(`Por favor informe o valor do produto: `);
-        let produto = new Produto(nome, tipo, valor);
-        this.produtos.push(produto)
+        let registrados = this.produtos.map(x => (x.nome))
+        if (registrados.includes(nome)){
+            console.log(`o produto já está registrado!`);
+            console.log();
+        } else{
+            let tipo = this.entrada.entTexto(`Por favor informe o tipo do produto: `)
+            let valor = this.entrada.entNumero(`Por favor informe o valor do produto: `);
+            let valorVendas = 0; 
+            let quantidadeVendas = 0; 
+            let produto = new Produto(nome, tipo, valor, quantidadeVendas, valorVendas);
+            this.produtos.push(produto)
         console.log(`\nCadastro concluído.\n`);
+        }
     }
 }

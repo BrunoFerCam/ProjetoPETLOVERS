@@ -16,15 +16,16 @@ export default class CadastroCliente extends Cadastro {
         let nome = this.entrada.entTexto(`Por favor informe o nome do cliente: `)
         let nomeSocial = this.entrada.entTexto(`Por favor informe o nome social do cliente: `)
         let valor = this.entrada.entTexto(`Por favor informe o número do cpf: `);
-        let data = this.entrada.entTexto(`Por favor informe a data de emissão do cpf, no padrão dd/mm/yyyy: `);
+        /*let data = this.entrada.entTexto(`Por favor informe a data de emissão do cpf, no padrão dd/mm/yyyy: `);
         let partesData = data.split('/')
         let ano = new Number(partesData[2].valueOf()).valueOf()
         let mes = new Number(partesData[1].valueOf()).valueOf()
         let dia = new Number(partesData[0].valueOf()).valueOf()
-        let dataEmissao = new Date(ano, mes, dia)
+        let dataEmissao = new Date(ano, mes, dia)*/
+        let dataEmissao = new Date()
         let cpf = new CPF(valor, dataEmissao);
-        let cliente = new Cliente(nome, nomeSocial, cpf);
+        let cliente = new Cliente(nome, nomeSocial, cpf, 0, 0);
         this.clientes.push(cliente)
-        console.log(`\nCadastro concluído :)\n`);
+        console.log(`\nCadastro concluído.\n`);
     }
 }

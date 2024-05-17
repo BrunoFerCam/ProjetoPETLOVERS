@@ -16,6 +16,8 @@ import ListagemClientes from "../negocio/listar/listagemClientes";
 import ListagemPets from "../negocio/listar/listagemPets";
 import ListagemProdutos from "../negocio/listar/listagemProdutos";
 import ListagemServicos from "../negocio/listar/listagemServicos";
+import VendaProduto from "../negocio/sistemaVendas/vendaProduto";
+import VendaServico from "../negocio/sistemaVendas/vendaServico";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`)
 let empresa = new Empresa()
@@ -43,6 +45,9 @@ while (execucao) {
     console.log(`14 - Listar todos os serviços`);
     console.log(`15 - Deletar um serviço`);
     console.log(`16 - Editar um serviço`);
+    console.log(`--Vendas--`);
+    console.log(`17 - Vender produto`);
+    console.log(`18 - Vender serviço`);
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -112,6 +117,14 @@ while (execucao) {
         case 16:
             let atualizaServico = new AtualizaServico(empresa.getServicos)
             atualizaServico.atualizar()
+            break;
+        case 17:
+            let vendaProduto = new VendaProduto(empresa.getClientes, empresa.getProdutos)
+            vendaProduto.cadastrar()
+            break;
+        case 18:
+            let vendaServico = new VendaServico(empresa.getClientes, empresa.getServicos)
+            vendaServico.cadastrar()
             break;
         case 0:
             execucao = false
