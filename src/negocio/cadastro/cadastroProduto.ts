@@ -15,7 +15,7 @@ export default class CadastroProduto extends Cadastro {
         let nome = this.entrada.entTexto(`Por favor informe o nome do produto: `)
         let registrados = this.produtos.map(x => (x.nome))
         if (registrados.includes(nome)){
-            console.log(`o produto já está registrado!`);
+            console.log(`o produto já está registrado.`);
             console.log();
         } else{
             let tipo = this.entrada.entTexto(`Por favor informe o tipo do produto: `)

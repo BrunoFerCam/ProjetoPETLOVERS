@@ -48,6 +48,7 @@ while (execucao) {
     console.log(`--Vendas--`);
     console.log(`17 - Vender produto`);
     console.log(`18 - Vender serviço`);
+    console.log(`-----------`)
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()

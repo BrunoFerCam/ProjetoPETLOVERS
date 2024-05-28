@@ -5,12 +5,12 @@ export default class Produto {
     public quantidadeVendas: number
     public valorVendas: number
 
-    constructor(nome: string, tipo: string, quantidadeVendas: number, valorvendas: number, valor: number) {
+    constructor(nome: string, tipo: string, valor: number, quantidadeVendas: number, valorvendas: number) {
         this.nome = nome
         this.tipo = tipo
+        this.valor = valor
         this.quantidadeVendas = quantidadeVendas
         this.valorVendas = valorvendas
-        this.valor = valor
     }
     public get getNome(){return this.nome}
     public get getTipo(){return this.tipo}

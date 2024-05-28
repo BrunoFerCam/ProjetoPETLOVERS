@@ -21,11 +21,13 @@ export default class vendaProduto extends Cadastro {
             const produto = this.produtos.find(produto=>produto.nome === produtoNome)
 
             if(produto){
-                let quantidadeVendida = 0
-                while(quantidadeVendida <= 0){
-                    quantidadeVendida = this.entrada.entNumero(`Informe a quantidade vendida: `)
+                let valorVendaProduto = 0
+                let quantidadeVendidaProduto = 0
+                while(quantidadeVendidaProduto <= 0){
+                    quantidadeVendidaProduto = this.entrada.entNumero(`Informe a quantidade vendida: `)
+                    valorVendaProduto = quantidadeVendidaProduto * produto.getValor
                 }
-                cliente.VendaProduto(produto, quantidadeVendida)
+                cliente.VendaProduto(produto, quantidadeVendidaProduto, valorVendaProduto)
                 console.log(`Venda registrada com sucesso para ${cliente.nome}.`)
             }
             else{
@@ -33,7 +35,7 @@ export default class vendaProduto extends Cadastro {
             }
         }
         else{
-            console.log(`CPF ${valorCpfCliente} não encontrado!`)
+            console.log(`CPF ${valorCpfCliente} não encontrado.`)
         }
     }
 }

@@ -17,7 +17,7 @@ export default class Cliente {
     private servicosConsumidos: Array<Servico>
     private pets: Array<Pet>
     public valorTotalConsumidoProdutos: number
-    private quantidadeTotalConsumidaProdutos: number
+    public quantidadeTotalConsumidaProdutos: number
     constructor(nome: string, nomeSocial: string, cpf: CPF, valorTotalConsumidoProdutos: number, quantidadeTotalConsumidaProdutos: number) {
         this.nome = nome
         this.nomeSocial = nomeSocial
@@ -58,12 +58,13 @@ export default class Cliente {
     public get getQuantidadeTotalConsumidaProdutos(): number {
         return this.quantidadeTotalConsumidaProdutos
     }
-    public VendaProduto(produto: Produto, quantidadeProduto: number): void {
+    public VendaProduto(produto: Produto, quantidadeProduto: number, valorProduto: number): void {
         if (!this.produtosConsumidos.includes(produto)) {
             this.produtosConsumidos.push(produto);
         }
+        let adicionarvalor = valorProduto * quantidadeProduto
         this.quantidadeTotalConsumidaProdutos = this.quantidadeTotalConsumidaProdutos + quantidadeProduto
-        this.valorTotalConsumidoProdutos = this.valorTotalConsumidoProdutos + (produto.valor * quantidadeProduto) 
+        this.valorTotalConsumidoProdutos = this.valorTotalConsumidoProdutos + adicionarvalor
         produto.adicionarVenda(quantidadeProduto);
     }
     public VendaServico(servico: Servico, quantidadeServico: number): void{
