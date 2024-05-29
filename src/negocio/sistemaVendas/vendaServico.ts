@@ -22,8 +22,9 @@ export default class VendaServico extends Cadastro {
             const servico = this.servicos.find(servico => servico.nome === nomeServico)
             if (servico){
                 console.log(`\nInício da venda do serviço.`);
-                let quantidadeServico = this.entrada.entNumero(`Por favor, informe a quantidade do serviço vendida: `)
-                cliente.VendaServico(servico, quantidadeServico)
+                let quantidadeVendidaServico = this.entrada.entNumero(`Por favor, informe a quantidade do serviço vendida: `)
+                let valorVendaServico = servico.valor
+                cliente.VendaServico(servico, quantidadeVendidaServico, valorVendaServico)
                 console.log(`Venda do serviço registrada com sucesso!`)
             } else {
                 console.log(`Serviço não encontrado.`)

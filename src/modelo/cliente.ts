@@ -18,7 +18,13 @@ export default class Cliente {
     private pets: Array<Pet>
     public valorTotalConsumidoProdutos: number
     public quantidadeTotalConsumidaProdutos: number
-    constructor(nome: string, nomeSocial: string, cpf: CPF, valorTotalConsumidoProdutos: number, quantidadeTotalConsumidaProdutos: number) {
+    public valorTotalConsumidoServicos: number
+    public quantidadeTotalConsumidaServicos: number
+    public valorTotalConsumido: number
+    constructor(nome: string, nomeSocial: string, cpf: CPF, 
+        valorTotalConsumidoProdutos: number, quantidadeTotalConsumidaProdutos: number,
+        valorTotalConsumidoServicos: number, quantidadeTotalConsumidaServicos: number,
+        valorTotalConsumido: number) {
         this.nome = nome
         this.nomeSocial = nomeSocial
         this.cpf = cpf
@@ -30,6 +36,9 @@ export default class Cliente {
         this.pets = []
         this.valorTotalConsumidoProdutos = valorTotalConsumidoProdutos
         this.quantidadeTotalConsumidaProdutos = quantidadeTotalConsumidaProdutos
+        this.valorTotalConsumidoServicos = valorTotalConsumidoServicos
+        this.quantidadeTotalConsumidaServicos = quantidadeTotalConsumidaServicos
+        this.valorTotalConsumido = valorTotalConsumido
     }
     public get getCpf(): CPF {
         return this.cpf
@@ -62,14 +71,21 @@ export default class Cliente {
         if (!this.produtosConsumidos.includes(produto)) {
             this.produtosConsumidos.push(produto);
         }
-        let adicionarvalor = valorProduto * quantidadeProduto
+        let adicionarvalorproduto = valorProduto * quantidadeProduto
         this.quantidadeTotalConsumidaProdutos = this.quantidadeTotalConsumidaProdutos + quantidadeProduto
-        this.valorTotalConsumidoProdutos = this.valorTotalConsumidoProdutos + adicionarvalor
+        this.valorTotalConsumidoProdutos = this.valorTotalConsumidoProdutos + adicionarvalorproduto
         produto.adicionarVenda(quantidadeProduto);
     }
-    public VendaServico(servico: Servico, quantidadeServico: number): void{
+    public VendaServico(servico: Servico, quantidadeServico: number, valorServico: number): void{
         if(!this.servicosConsumidos.includes(servico)) {
             this.servicosConsumidos.push(servico);
         }
+        let adicionarvalorservico = valorServico * quantidadeServico
+        this.quantidadeTotalConsumidaServicos = this.quantidadeTotalConsumidaServicos + quantidadeServico
+        this.valorTotalConsumidoServicos = this.valorTotalConsumidoServicos + adicionarvalorservico
+        servico.adicionarVenda(quantidadeServico)
+    }
+    public ValorTotalConsumido(valorTotalConsumidoProdutos: number, valorTotalConsumidoServicos: number): void {
+        this.valorTotalConsumido = this.valorTotalConsumidoProdutos + this.valorTotalConsumidoServicos
     }
 }
