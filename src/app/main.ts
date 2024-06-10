@@ -18,6 +18,7 @@ import ListagemProdutos from "../negocio/listar/listagemProdutos";
 import ListagemServicos from "../negocio/listar/listagemServicos";
 import VendaProduto from "../negocio/sistemaVendas/vendaProduto";
 import VendaServico from "../negocio/sistemaVendas/vendaServico";
+import MaioresConsumidoresQuantidade from "../negocio/topConsumos/maioresConsumidoresQuantidade";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`)
 let empresa = new Empresa()
@@ -49,6 +50,11 @@ while (execucao) {
     console.log(`17 - Vender produto`);
     console.log(`18 - Vender serviço`);
     console.log(`-----------`)
+    console.log(`--Maiores Vendas--`);
+    console.log(`19 - Top 10 consumidores por quantidade de produtos comprados`)
+    console.log(`20 - Top 5 consumidores por valor total gasto em produtos`)
+    console.log(`21 - Produtos mais consumidos`)
+    console.log(`22 - Produtos mais consumidos por tipo e raça de pet`)
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -126,6 +132,10 @@ while (execucao) {
         case 18:
             let vendaServico = new VendaServico(empresa.getClientes, empresa.getServicos)
             vendaServico.cadastrar()
+            break;
+        case 19:
+            let maioresConsumidoresQuantidade = new MaioresConsumidoresQuantidade(empresa.getClientes)
+            maioresConsumidoresQuantidade.listar()
             break;
         case 0:
             execucao = false
