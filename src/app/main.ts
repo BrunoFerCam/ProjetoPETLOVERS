@@ -149,6 +149,7 @@ while (execucao) {
         case 21:
             let MaioresConsumosProduto = new MaioresConsumidoresProduto(empresa.getProdutos)
             MaioresConsumosProduto.listar()
+            break;
         case 22:
             let MaioresConsumosServico = new MaioresConsumidoresServico(empresa.getServicos)
             MaioresConsumosServico.listar()
