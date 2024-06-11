@@ -38,7 +38,7 @@ export default class Cliente {
         this.quantidadeTotalConsumidaProdutos = quantidadeTotalConsumidaProdutos
         this.valorTotalConsumidoServicos = valorTotalConsumidoServicos
         this.quantidadeTotalConsumidaServicos = quantidadeTotalConsumidaServicos
-        this.valorTotalConsumido = valorTotalConsumido
+        this.valorTotalConsumido = valorTotalConsumidoProdutos + valorTotalConsumidoServicos
     }
     public get getCpf(): CPF {
         return this.cpf

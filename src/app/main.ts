@@ -19,6 +19,10 @@ import ListagemServicos from "../negocio/listar/listagemServicos";
 import VendaProduto from "../negocio/sistemaVendas/vendaProduto";
 import VendaServico from "../negocio/sistemaVendas/vendaServico";
 import MaioresConsumidoresQuantidade from "../negocio/topConsumos/maioresConsumidoresQuantidade";
+import MaioresConsumidoresValor from "../negocio/topConsumos/maioresConsumidoresValor";
+import MaioresConsumidoresProduto from "../negocio/topConsumos/maioresConsumosProduto";
+import MaioresConsumidoresServico from "../negocio/topConsumos/maioresConsumosServico";
+import MaioresConsumosPet from "../negocio/topConsumos/produtosPet";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`)
 let empresa = new Empresa()
@@ -54,7 +58,8 @@ while (execucao) {
     console.log(`19 - Top 10 consumidores por quantidade de produtos comprados`)
     console.log(`20 - Top 5 consumidores por valor total gasto em produtos`)
     console.log(`21 - Produtos mais consumidos`)
-    console.log(`22 - Produtos mais consumidos por tipo e raça de pet`)
+    console.log(`22 - Serviços mais consumidos`)
+    console.log(`23 - Listagem de tipos, raças e gêneros de pets por quantidade`)
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -136,6 +141,21 @@ while (execucao) {
         case 19:
             let maioresConsumidoresQuantidade = new MaioresConsumidoresQuantidade(empresa.getClientes)
             maioresConsumidoresQuantidade.listar()
+            break;
+        case 20:
+            let maioresConsumidoresValor = new MaioresConsumidoresValor(empresa.getClientes)
+            maioresConsumidoresValor.listar()
+            break;
+        case 21:
+            let MaioresConsumosProduto = new MaioresConsumidoresProduto(empresa.getProdutos)
+            MaioresConsumosProduto.listar()
+        case 22:
+            let MaioresConsumosServico = new MaioresConsumidoresServico(empresa.getServicos)
+            MaioresConsumosServico.listar()
+            break;
+        case 23:
+            let maioresConsumosPet = new MaioresConsumosPet(empresa.getPets)
+            maioresConsumosPet.listar()
             break;
         case 0:
             execucao = false
