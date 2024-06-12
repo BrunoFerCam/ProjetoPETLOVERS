@@ -4,9 +4,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../styles/barraNav.css";
 
 type props = {
-    tema: string,
     botoes: string[],
     seletorView: Function
+    className?: string
 }
 
 export default class BarraNavegacao extends Component<props>{
@@ -30,7 +30,6 @@ export default class BarraNavegacao extends Component<props>{
     }
 
     render() {
-        let tema = this.props.tema
         return (
             <>
                 <nav className="navbar navbar-expand-lg">

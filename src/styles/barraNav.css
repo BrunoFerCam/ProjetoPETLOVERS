@@ -34,6 +34,7 @@ body {
     max-height: 30%;
 }
 
-.barranavegacao{
-    color:white;
+.nav-link{
+    color: white;
+    float: right;
 }
