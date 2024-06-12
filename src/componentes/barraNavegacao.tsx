@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "../styles/barraNav.css";
 
 type props = {
     tema: string,
@@ -32,9 +33,9 @@ export default class BarraNavegacao extends Component<props>{
         let tema = this.props.tema
         return (
             <>
-                <nav className="navbar navbar-expand-lg" data-bs-theme="light" style={{ backgroundColor: tema, marginBottom: 10 }}>
+                <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
-                        <span className="navbar-brand mb-0 h1">PetLovers</span>
+                        <img src={require("../images/PETLOVERS3.png")} alt="PETLOVERS3" className="navbar-brand" />
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
