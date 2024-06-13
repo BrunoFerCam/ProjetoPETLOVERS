@@ -5,7 +5,7 @@ type Props = {
     tema: string;
 };
 
-export default class ServiceList extends Component<Props> {
+export default class ListaServico extends Component<Props> {
     render() {
         const theme = this.props.tema;
         return (

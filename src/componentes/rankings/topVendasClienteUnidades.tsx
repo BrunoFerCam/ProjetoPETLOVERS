@@ -5,9 +5,9 @@ type Props = {
     tema: string;
 };
 
-export default class TopVendasClienteValor extends Component<Props> {
+export default class TopVendasClienteUnidades extends Component<Props> {
     render() {
-        const { tema} = this.props;
+        const { tema } = this.props;
         return (
             <div className="container-fluid">
                 <div className="list-group">

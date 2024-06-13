@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Component } from "react";
+import "../styles/listasCss.css";
 
 type props = {
     tema: string

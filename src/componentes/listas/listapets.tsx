@@ -1,25 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Component } from "react";
 
-type Props = {
+type props = {
     tema: string
 }
 
-export default class ListaPets extends Component<Props> {
+export default class ListaPets extends Component<props>{
     render() {
-        const tema = this.props.tema;
-        const petNames = ["Pet 1", "Pet 2", "Pet 3", "Pet 4", "Pet 5", "Pet 6"];
-
+        let tema = this.props.tema
         return (
             <div className="container-fluid">
                 <div className="list-group">
-                    {petNames.map((petName, index) => (
-                        <a key={index} href="#" className="list-group-item list-group-item-action">
-                            {petName}
-                        </a>
-                    ))}
+                    <a href="#" className="list-group-item list-group-item-action">Pet 1</a>
+                    <a href="#" className="list-group-item list-group-item-action">Pet 2</a>
+                    <a href="#" className="list-group-item list-group-item-action">Pet 3</a>
+                    <a href="#" className="list-group-item list-group-item-action">Pet 4</a>
+                    <a href="#" className="list-group-item list-group-item-action">Pet 5</a>
+                    <a href="#" className="list-group-item list-group-item-action">Pet 6</a>
                 </div>
             </div>
-        );
+        )
     }
 }

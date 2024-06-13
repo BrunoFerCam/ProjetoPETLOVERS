@@ -1,12 +1,11 @@
-        import React from "react";
-        import { Component } from "react";
-        import BarraNavegacao from "./barraNavegacao";
-        import ListaCliente from "./listas/listaClientes";
-        import ListaPets from "./listas/listapets";
-        import CatalogoProdutos from "./listas/catalogoprodutos";
-        import CatalogoServicos from "./listas/catalogoservicos";
-        import TopVendasProduto from "./rankings/topVendasProduto";
-        import VendaProduto from "./vendas/vendaProdutos";
+import React from "react";
+import { Component } from "react";
+import BarraNavegacao from "./barraNavegacao";
+import Listas from "./base/listas";
+import Cadastros from "./base/cadastros";
+import Atualizar from "./base/atualizar";
+import Rankings from "./base/rankings";
+import Vendas from "./base/vendas";
 
         type state = {
             tela: string;
@@ -16,7 +15,7 @@
             constructor(props: {} | Readonly<{}>) {
                 super(props);
                 this.state = {
-                    tela: "Clientes",
+                    tela: "Cadastros",
                 };
                 this.selecionarView = this.selecionarView.bind(this);
             }
@@ -33,45 +32,37 @@
                 let barraNavegacao = (
                     <BarraNavegacao
                         seletorView={this.selecionarView}
-                        botoes={["Clientes", "Pets", "Produtos", "Serviços", "Ranks", "Vendas"]}
+                        botoes={["Cadastros", "Atualizar", "Listas", "Rankings", "Vendas"]}
                         className="barraNavegacao"
                     />
                 );
 
-                if (this.state.tela === "Clientes") {
+                if (this.state.tela === "Cadastros") {
                     return (
                         <>
                             {barraNavegacao}
-                            <ListaCliente tema="#e3f2fd" />
+                            <Cadastros tema="#e3f2fd"/>
                         </>
                     );
-                } else if (this.state.tela === "Pets") {
+                } else if (this.state.tela === "Atualizar") {
                     return (
                         <>
                             {barraNavegacao}
-                            <ListaPets tema="#e3f2fd" />
+                            <Atualizar tema="#e3f2fd"/>
                         </>
                     );
-                } else if (this.state.tela === "Produtos") {
+                } else if (this.state.tela === "Listas") {
                     return (
                         <>
                             {barraNavegacao}
-                            <CatalogoProdutos tema="#e3f2fd" />
+                            <Listas tema="#e3f2fd"/>
                         </>
                     );
-                } else if (this.state.tela === "Serviços") {
-                    return (
-                        <>
-                            {barraNavegacao}
-                            <CatalogoServicos tema="#e3f2fd" />
-                        </>
-                    );
-                } else if (this.state.tela === "Ranks") {
+                } else if (this.state.tela === "Rankings") {
                     return (
                         <>
                         {barraNavegacao}
-                        <TopVendasProduto tema="#e3f2fd" vendas={[10, 20, 30, 40, 50]} />
-                        
+                        <Rankings tema="#e3f2fd"/>
                         </>
                     );
                 } 
@@ -79,7 +70,7 @@
                     return (
                         <>
                         {barraNavegacao}
-                        <VendaProduto tema="#e3f2fd"/>
+                        <Vendas tema="#e3f2fd"/>
                         
                         </>
                     );

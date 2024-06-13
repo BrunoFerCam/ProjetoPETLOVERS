@@ -5,7 +5,7 @@ type Props = {
     tema: string
 }
 
-export default class CatalogoProdutos extends Component<Props>{
+export default class ListaProdutos extends Component<Props>{
     render() {
         let tema = this.props.tema
         return (
