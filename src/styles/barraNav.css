@@ -36,5 +36,5 @@ body {
 
 .nav-link{
     color: white;
-    float: right;
+    font-weight: bold;
 }

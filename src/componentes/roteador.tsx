@@ -5,6 +5,8 @@
         import ListaPets from "./listas/listapets";
         import CatalogoProdutos from "./listas/catalogoprodutos";
         import CatalogoServicos from "./listas/catalogoservicos";
+        import TopVendasProduto from "./rankings/topVendasProduto";
+        import VendaProduto from "./vendas/vendaProdutos";
 
         type state = {
             tela: string;
@@ -31,7 +33,7 @@
                 let barraNavegacao = (
                     <BarraNavegacao
                         seletorView={this.selecionarView}
-                        botoes={["Clientes", "Pets", "Produtos", "Serviços"]}
+                        botoes={["Clientes", "Pets", "Produtos", "Serviços", "Ranks", "Vendas"]}
                         className="barraNavegacao"
                     />
                 );
@@ -64,7 +66,25 @@
                             <CatalogoServicos tema="#e3f2fd" />
                         </>
                     );
-                } else {
+                } else if (this.state.tela === "Ranks") {
+                    return (
+                        <>
+                        {barraNavegacao}
+                        <TopVendasProduto tema="#e3f2fd" vendas={[10, 20, 30, 40, 50]} />
+                        
+                        </>
+                    );
+                } 
+                else if (this.state.tela === "Vendas") {
+                    return (
+                        <>
+                        {barraNavegacao}
+                        <VendaProduto tema="#e3f2fd"/>
+                        
+                        </>
+                    );
+                }
+                    else{
                     return null;
                 }
             }
