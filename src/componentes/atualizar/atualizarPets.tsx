@@ -14,7 +14,7 @@ export default function FormularioAtualizarPets(props: Props) {
     return (
         <div className="container-fluid">
             <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={handleExpand}>
-                Pet Expand
+                Atualizar Pet
             </button>
             {isExpanded && (
                 <form>

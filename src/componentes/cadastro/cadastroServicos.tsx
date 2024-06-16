@@ -1,17 +1,24 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 
 type Props = {
     tema: string;
 }
 
-export default class FormularioCadastroServicos extends Component<Props> {
+export default function FormularioCadastrarServico(props: Props) {
+    const [isExpanded, setIsExpanded] = useState(false);
 
-    render() {
-        let tema = this.props.tema
-        return (
-            <div className="container-fluid">
+    const handleExpand = () => {
+        setIsExpanded(!isExpanded);
+    }
+
+    return (
+        <div className="container-fluid">
+            <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={handleExpand}>
+                Cadastrar Serviço
+            </button>
+            {isExpanded && (
                 <form>
-                <div className="input-group mb-3">
+                    <div className="input-group mb-3">
                         <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" />
                     </div>
                     <div className="input-group mb-3">
@@ -21,10 +28,10 @@ export default class FormularioCadastroServicos extends Component<Props> {
                         <input type="number" className="form-control" placeholder="Descrição" aria-label="Descrição" aria-describedby="basic-addon1" />
                     </div>
                     <div className="input-group mb-3">
-                        <button className="btn btn-outline-secondary" type="button" style={{ background: tema }}>Cadastrar Serviço</button>
+                        <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }}>Cadastrar Serviço</button>
                     </div>
                 </form>
-            </div>
-        )
-    }
+            )}
+        </div>
+    );
 }

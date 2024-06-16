@@ -14,7 +14,7 @@ export default function FormularioAtualizarProdutos(props: Props) {
     return (
         <div className="container-fluid">
             <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={handleExpand}>
-                Product Expand
+                Atualizar Produto
             </button>
             {isExpanded && (
                 <form>
