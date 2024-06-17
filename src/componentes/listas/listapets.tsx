@@ -6,7 +6,7 @@ type Props = {
     tema: string;
 };
 
-export default function ListaPet(props: Props) {
+export default function ListaPets(props: Props) {
     const [showList, setShowList] = useState(false);
 
     const toggleList = () => {

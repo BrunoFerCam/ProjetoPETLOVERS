@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ListaCliente from "../listas/listaClientes";
-import ListaPets from "../listas/listapets";
+import ListaPets from "../listas/listaPets"; 
 import ListaProdutos from "../listas/listaProdutos";
 import ListaServico from "../listas/listaServicos";
 import "../styles/listasCss.css";
