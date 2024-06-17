@@ -27,6 +27,7 @@ export default function VendaProdutos (props: Props) {
                         <input type="text" className="form-control" placeholder="Nome do cliente" aria-label="Nome do cliente" aria-describedby="basic-addon1" />
                     </div>
                     <div className="input-group mb-3">
+                         <span className="input-group-text" id="basic-addon1" style={{ background: tema }}>@</span>
                         <input type="text" className="form-control" placeholder="E-mail do cliente" aria-label="E-mail do cliente" aria-describedby="basic-addon1" />
                     </div>
                     <div className="input-group mb-3">

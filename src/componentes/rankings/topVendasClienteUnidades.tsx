@@ -1,30 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Component } from "react";
+import { Component, useState } from "react";
+import "../styles/listasCss.css";
 
 type Props = {
     tema: string;
 };
 
-export default class TopVendasClienteUnidades extends Component<Props> {
-    render() {
-        const { tema } = this.props;
-        return (
-            <div className="container-fluid">
+export default function TopVendasClienteUnidade(props: Props) {
+    const [showList, setShowList] = useState(false);
+
+    const toggleList = () => {
+        setShowList(!showList);
+    };
+
+    return (
+        <div className="container-fluid">
+            <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={toggleList}>{showList ? "Esconder Top Clientes por Unidade" : "Mostrar Top Clientes por Unidade"}</button>
+            {showList && (
                 <div className="list-group">
-                {[
-                        { name: "Cliente 1", sales: 100 },
-                        { name: "Cliente 2", sales: 80 },
-                        { name: "Cliente 3", sales: 60 },
-                        { name: "Cliente 4", sales: 40 },
-                        { name: "Cliente 5", sales: 20 }
-                    ].map((Cliente, index) => (
-                        <a key={index} href="#" className="list-group-item">
-                            <span className="badge">{Cliente.sales}</span>
-                            {Cliente.name}
-                        </a>
-                    ))}
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 1
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 2
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 3
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 4
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 5
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Cliente 6
+                    </a>
                 </div>
-            </div>
-        );
-    }
+            )}
+        </div>
+    );
 }

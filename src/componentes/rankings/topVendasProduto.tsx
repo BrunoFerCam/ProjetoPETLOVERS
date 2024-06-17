@@ -1,30 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Component } from "react";
+import { Component, useState } from "react";
+import "../styles/listasCss.css";
 
 type Props = {
     tema: string;
 };
 
-export default class TopVendasProduto extends Component<Props> {
-    render() {
-        const { tema } = this.props;
-        return (
-            <div className="container-fluid">
+export default function TopVendasProduto(props: Props) {
+    const [showList, setShowList] = useState(false);
+
+    const toggleList = () => {
+        setShowList(!showList);
+    };
+
+    return (
+        <div className="container-fluid">
+            <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={toggleList}>{showList ? "Esconder Top Produtos" : "Mostrar Top Produtos"}</button>
+            {showList && (
                 <div className="list-group">
-                    {[
-                        { name: "Product 1", sales: 100 },
-                        { name: "Product 2", sales: 80 },
-                        { name: "Product 3", sales: 60 },
-                        { name: "Product 4", sales: 40 },
-                        { name: "Product 5", sales: 20 }
-                    ].map((product, index) => (
-                        <a key={index} href="#" className="list-group-item">
-                            <span className="badge">{product.sales}</span>
-                            {product.name}
-                        </a>
-                    ))}
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 1
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 2
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 3
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 4
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 5
+                    </a>
+                    <a href="#" className="list-group-item list-group-item-action">
+                        Top Produto 6
+                    </a>
                 </div>
-            </div>
-        );
-    }
+            )}
+        </div>
+    );
 }
