@@ -1,7 +1,7 @@
 body {
     background: linear-gradient(270deg, #470198, #8a00a8, #a8008b);
     background-size: 600% 600%;
-
+    font-family: "Courier New", Courier, monospace;
     -webkit-animation: BGscroll 41s ease infinite;
     -moz-animation: BGscroll 41s ease infinite;
     -o-animation: BGscroll 41s ease infinite;
