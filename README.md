@@ -2,6 +2,7 @@ Passo a Passo
 Clone o Repositório:
 
 Execute o comando: git clone https://github.com/BrunoFerCam/ProjetoPETLOVERS .
+
 Instale as Dependências:
 
 No diretório do projeto, execute: npm install
