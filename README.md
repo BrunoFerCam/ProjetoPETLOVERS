@@ -2,7 +2,7 @@ Passo a Passo:
 
 Clone o repositório:
 
-git clone https://github.com/BrunoFerCam/ProjetoPETLOVERS/tree/Atv-I.
+git clone https://github.com/BrunoFerCam/ProjetoPETLOVERS/tree/Atv-II.
 
 *
 
