@@ -56,11 +56,11 @@ body {
         transition: border-width 0.25s ease;
     }
     .input-group.mb-3 {
-        animation: yourAnimationName 1s ease-in-out;
+        animation: -Animation- 1s ease-in-out;
     }
 
-    @keyframes yourAnimationName {
+    @keyframes -Animation- {
         0% { transform: translateY(0); }
-        50% { transform: translateY(10px); }
+        50% { transform: translateY(5px); }
         100% { transform: translateY(0); }
     }

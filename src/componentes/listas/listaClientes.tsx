@@ -1,148 +1,260 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState} from "react";
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-type props = {
-    tema: string
-}
+const RED_COLOR = "#fc6464";
+const GREEN_COLOR = "#00ff00";
 
-export default function ListaCliente(props: any){
-        let red = "#fc6464"
-        let tema = props.tema
-        let green = "#00ff00"
-        const [clientes, setClientes] = useState<Array<{id:number; nome:string; nome_social:string; genero:string; email:string; cpf:string; dataCpf:Date; rg:string; dataRg:Date; servico_consumido:number, produto_consumido:number }>>([])
-        const [nome, setNome] = useState('')
-        const [nome_social, setNomeSocial] = useState('')
-        const [genero, setGenero] = useState('')
-        const [email, setEmail] = useState('');
-        const [cerror, setError] = useState('');
+type Cliente = {
+  id: number;
+  nome: string;
+  nome_social: string;
+  genero: string;
+  email: string;
+  cpf: string;
+  dataCpf: Date;
+  rg: string;
+  dataRg: Date;
+  servico_consumido: number;
+  produto_consumido: number;
+};
 
-        useEffect(()=>{
-            axios.get('http://localhost:3001/clientes')
-             .then((response) =>{
-                setClientes(response.data)
-             })
-             .catch((error)=>{
-                console.error(error)
-             })
-        }, [])
+type ListaClienteProps = {
+  tema: string;
+};
 
-        const deletar = (id:number) =>{
-            axios.delete(`http://localhost:3001/clientes/${id}`)
-            .then((response) =>{
-                updateClientes();
-            })
-            .catch((error) =>{
-                console.error(error)
-            })
+const ListaCliente: React.FC<ListaClienteProps> = ({ tema }) => {
+  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [nome, setNome] = useState("");
+  const [nomeSocial, setNomeSocial] = useState("");
+  const [genero, setGenero] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
 
-        }
+  const fetchClientes = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/clientes");
+      setClientes(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-        const handleUpdate = (id: number) =>{
-            if(nome && nome_social && email){
-              axios.put(`http://localhost:3001/clientesEditar/${id}`, {nome, nome_social, genero, email})
-                .then(()=>{
-                    updateClientes();
-                    setNome('')
-                    setNomeSocial('')
-                    setEmail('')
-                })
-                .catch((error) =>{
-                  console.error(error)
-                })
-            }
-            else if(nome === '' || nome_social === '' || email === '' || genero){
-                setError('Preencha todos os campos, caso não for editar apenas coloque o mesmo valor anterior!')
-            }  
-     }
+  useEffect(() => {
+    fetchClientes();
+  }, []);
 
-        const updateClientes = () =>{
-            axios.get('http://localhost:3001/clientes')
-            .then((response) => {
-              setClientes(response.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }
-        
+  const handleDelete = async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:3001/clientes/${id}`);
+      fetchClientes();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  const handleUpdate = async (id: number) => {
+    if (nome && nomeSocial && email) {
+      try {
+        await axios.put(`http://localhost:3001/clientesEditar/${id}`, {
+          nome,
+          nome_social: nomeSocial,
+          genero,
+          email,
+        });
+        fetchClientes();
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setError("Preencha todos os campos. Caso não for editar, coloque o mesmo valor anterior.");
+    }
+  };
 
-        const [isExpanded, setIsExpanded] = useState(false);
+  const resetForm = () => {
+    setNome("");
+    setNomeSocial("");
+    setGenero("");
+    setEmail("");
+  };
 
-        const handleExpand = () => {
-            setIsExpanded(!isExpanded);
-        }
-    
-        return (
-            <div className="container-fluid">
-                <button className="btn btn-outline-secondary" type="button" style={{ background: props.tema }} onClick={handleExpand}>
-                    Exibir Clientes
-                </button>
-                {isExpanded && (
-                <div className="list-group">
-                    {clientes.map((cliente, index) =>(
-                        <div key={index} className="accordion">
-                            <div className="accordion-item">
-                                <h2 className="accordion-header">
-                                    <button 
-                                    className="accordion-button collapsed" 
-                                    type="button" 
-                                    data-bs-toggle ="collapse"
-                                    data-bs-target={`#collapseOne${index}`} 
-                                    aria-expanded="true" 
-                                    aria-controls={`collapseOne${index}`}
-                                    >
-                                    {cliente.nome}
-                                    </button>
-                                </h2>
-                            <div 
-                            id={`collapseOne${index}`} 
-                            className="accordion-collapse collapse"
-                            >
-                                <div className="accordion-body">
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">Nome:</label>
-                                        <input type="text" className="form-control" value={nome} onChange={(e)=>setNome(e.target.value)} placeholder={cliente.nome} aria-label="Nome cliente" aria-describedby="basic-addon1"/>
-                                    </div>
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">Nome Social:</label>
-                                        <input type="text" className="form-control" value={nome_social} onChange={(e)=>setNomeSocial(e.target.value)} placeholder={cliente.nome_social} aria-label="Nome cliente" aria-describedby="basic-addon1"/>
-                                    </div>
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">Gênero</label>
-                                        <select className="form-select" value={genero} onChange={(e)=>setGenero(e.target.value)}>
-                                            <option value="">{cliente.genero}</option>
-                                            <option value="masculino">Masculino</option>
-                                            <option value="feminino">Feminino</option>
-                                            <option value="outro">Outro</option>
-                                        </select>
-                                    </div>
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">CPF:</label>
-                                        <input type="text" className="form-control" placeholder={cliente.cpf} aria-label="CPF" aria-describedby="basic-addon1" disabled/>
-                                    </div>
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">RG:</label>
-                                        <input type="text" className="form-control" placeholder={cliente.rg} aria-label="RG" aria-describedby="basic-addon1" disabled/>
-                                    </div>
-                                    <div className="input-group-3">
-                                        <label className="input-group mb-1">E-mail:</label>
-                                        <input type="text" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder={cliente.email} aria-label="Email" aria-describedby="basic-addon1"/>
-                                    </div>
-                                    <br />
-                                    <div className="input-group mb-3">
-                                        <button className="input-group-text" onClick={()=>deletar(cliente.id)} style={{ background: red }}>Deletar</button>
-                                        <button className="input-group-text" onClick={()=>handleUpdate(cliente.id)} style={{ background: green }}>Editar</button>
-                                    </div>
-                                    {cerror && <div className="alert alert-danger" role="alert" style={{color:'red'}}>{cerror}</div>}
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    ))}
+  return (
+    <div className="container-fluid">
+      <button
+        className="btn btn-outline-secondary"
+        type="button"
+        style={{ background: tema }}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        Exibir Clientes
+      </button>
+      {isExpanded && (
+        <div className="list-group">
+          {clientes.map((cliente, index) => (
+            <div key={index} className="accordion">
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#collapseOne${index}`}
+                    aria-expanded="true"
+                    aria-controls={`collapseOne${index}`}
+                  >
+                    {cliente.nome}
+                  </button>
+                </h2>
+                <div
+                  id={`collapseOne${index}`}
+                  className="accordion-collapse collapse"
+                >
+                  <div className="accordion-body">
+                    <ClienteForm
+                      cliente={cliente}
+                      nome={nome}
+                      setNome={setNome}
+                      nomeSocial={nomeSocial}
+                      setNomeSocial={setNomeSocial}
+                      genero={genero}
+                      setGenero={setGenero}
+                      email={email}
+                      setEmail={setEmail}
+                      handleDelete={handleDelete}
+                      handleUpdate={handleUpdate}
+                      error={error}
+                    />
+                  </div>
                 </div>
-                )}
+              </div>
             </div>
-        );
-}
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+type ClienteFormProps = {
+  cliente: Cliente;
+  nome: string;
+  setNome: (value: string) => void;
+  nomeSocial: string;
+  setNomeSocial: (value: string) => void;
+  genero: string;
+  setGenero: (value: string) => void;
+  email: string;
+  setEmail: (value: string) => void;
+  handleDelete: (id: number) => void;
+  handleUpdate: (id: number) => void;
+  error: string;
+};
+
+const ClienteForm: React.FC<ClienteFormProps> = ({
+  cliente,
+  nome,
+  setNome,
+  nomeSocial,
+  setNomeSocial,
+  genero,
+  setGenero,
+  email,
+  setEmail,
+  handleDelete,
+  handleUpdate,
+  error,
+}) => (
+  <>
+    <div className="input-group mb-1">
+      <label className="input-group-text">Nome:</label>
+      <input
+        type="text"
+        className="form-control"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+        placeholder={cliente.nome}
+        aria-label="Nome cliente"
+      />
+    </div>
+    <div className="input-group mb-1">
+      <label className="input-group-text">Nome Social:</label>
+      <input
+        type="text"
+        className="form-control"
+        value={nomeSocial}
+        onChange={(e) => setNomeSocial(e.target.value)}
+        placeholder={cliente.nome_social}
+        aria-label="Nome social cliente"
+      />
+    </div>
+    <div className="input-group mb-1">
+      <label className="input-group-text">Gênero:</label>
+      <select
+        className="form-select"
+        value={genero}
+        onChange={(e) => setGenero(e.target.value)}
+      >
+        <option value="">{cliente.genero}</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+        <option value="outro">Outro</option>
+      </select>
+    </div>
+    <div className="input-group mb-1">
+      <label className="input-group-text">CPF:</label>
+      <input
+        type="text"
+        className="form-control"
+        placeholder={cliente.cpf}
+        aria-label="CPF"
+        disabled
+      />
+    </div>
+    <div className="input-group mb-1">
+      <label className="input-group-text">RG:</label>
+      <input
+        type="text"
+        className="form-control"
+        placeholder={cliente.rg}
+        aria-label="RG"
+        disabled
+      />
+    </div>
+    <div className="input-group mb-1">
+      <label className="input-group-text">E-mail:</label>
+      <input
+        type="text"
+        className="form-control"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder={cliente.email}
+        aria-label="Email cliente"
+      />
+    </div>
+    <div className="input-group mb-3">
+      <button
+        className="btn btn-danger"
+        onClick={() => handleDelete(cliente.id)}
+        style={{ background: RED_COLOR }}
+      >
+        Deletar
+      </button>
+      <button
+        className="btn btn-success"
+        onClick={() => handleUpdate(cliente.id)}
+        style={{ background: GREEN_COLOR }}
+      >
+        Editar
+      </button>
+    </div>
+    {error && (
+      <div className="alert alert-danger" role="alert">
+        {error}
+      </div>
+    )}
+  </>
+);
+
+export default ListaCliente;
