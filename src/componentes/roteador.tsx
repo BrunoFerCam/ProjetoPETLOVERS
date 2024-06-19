@@ -1,82 +1,74 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component, MouseEvent } from "react";
 import BarraNavegacao from "./barraNavegacao";
-import Listas from "./base/listas";
-import Cadastros from "./base/cadastros";
-import Atualizar from "./base/atualizar";
-import Rankings from "./base/rankings";
-import Vendas from "./base/vendas";
+import ListaCliente from "./listas/listaClientes";
+import FormularioCadastrarCliente from "./cadastro/cadastroClientes";
+import FormularioCadastrarPet from "./cadastro/cadastroPets";
+import FormularioCadastrarProdutos from "./cadastro/cadastroProdutos";
+import FormularioCadastrarServicos from "./cadastro/cadastroServicos";
+import ListaPet from "./listas/listaPets";
+import ListaProduto from "./listas/listaProdutos";
+import ListaServico from "./listas/listaServicos";
+import RegistrarVendaProduto from "./vendas/vendaProdutos";
+import RegistrarVendaServico from "./vendas/vendaServicos";
 
-        type state = {
-            tela: string;
+type State = {
+    currentSection: string;
+};
+
+export default class Roteador extends Component<{}, State> {
+    constructor(props: {} | Readonly<{}>) {
+        super(props);
+        this.state = {
+            currentSection: 'Listar'  // Default section
         };
+        this.handleNavigationClick = this.handleNavigationClick.bind(this);
+    }
 
-        export default class Roteador extends Component<{}, state> {
-            constructor(props: {} | Readonly<{}>) {
-                super(props);
-                this.state = {
-                    tela: "Cadastros",
-                };
-                this.selecionarView = this.selecionarView.bind(this);
-            }
+    handleNavigationClick(section: string, event: MouseEvent) {
+        event.preventDefault();
+        this.setState({
+            currentSection: section
+        });
+    }
 
-            selecionarView(novaTela: string, evento: Event) {
-                evento.preventDefault();
-                console.log(novaTela);
-                this.setState({
-                    tela: novaTela,
-                });
-            }
+    render() {
+        const { currentSection } = this.state;
 
-            render() {
-                let barraNavegacao = (
-                    <BarraNavegacao
-                        seletorView={this.selecionarView}
-                        botoes={["Cadastros", "Atualizar", "Listas", "Rankings", "Vendas"]}
-                        className="barraNavegacao"
-                    />
-                );
-
-                if (this.state.tela === "Cadastros") {
-                    return (
-                        <>
-                            {barraNavegacao}
-                            <Cadastros tema="#e3f2fd"/>
-                        </>
-                    );
-                } else if (this.state.tela === "Atualizar") {
-                    return (
-                        <>
-                            {barraNavegacao}
-                            <Atualizar tema="#e3f2fd"/>
-                        </>
-                    );
-                } else if (this.state.tela === "Listas") {
-                    return (
-                        <>
-                            {barraNavegacao}
-                            <Listas tema="#e3f2fd"/>
-                        </>
-                    );
-                } else if (this.state.tela === "Rankings") {
-                    return (
-                        <>
-                        {barraNavegacao}
-                        <Rankings tema="#e3f2fd"/>
-                        </>
-                    );
-                } 
-                else if (this.state.tela === "Vendas") {
-                    return (
-                        <>
-                        {barraNavegacao}
-                        <Vendas tema="#e3f2fd"/>
-                        
-                        </>
-                    );
-                }
-                    else{
-                    return null;
-                }
-            }
-        }
+        return (
+            <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+                {/* Main Navigation Bar */}
+                <BarraNavegacao
+                    seletorView={(section: string, event: MouseEvent) =>
+                        this.handleNavigationClick(section, event)
+                    }
+                    botoes={['Listar', 'Cadastrar', 'Registrar Venda']}
+                />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    {/* Conditional Rendering Based on Section */}
+                    {currentSection === 'Listar' && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '20px', textAlign: 'center' }}>
+                            <ListaCliente tema="#e3f2fd" />
+                            <ListaPet tema="#e3f2fd" />
+                            <ListaProduto tema="#e3f2fd" />
+                            <ListaServico tema="#e3f2fd" />
+                        </div>
+                    )}
+                    {currentSection === 'Cadastrar' && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '20px', textAlign: 'center' }}>
+                            <FormularioCadastrarCliente tema="#e3f2fd" />
+                            <FormularioCadastrarPet tema="#e3f2fd" />
+                            <FormularioCadastrarProdutos tema="#e3f2fd" />
+                            <FormularioCadastrarServicos tema="#e3f2fd" />
+                        </div>
+                    )}
+                    {currentSection === 'Registrar Venda' && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '20px', textAlign: 'center' }}>
+                            <RegistrarVendaProduto tema="#e3f2fd" />
+                            <RegistrarVendaServico tema="#e3f2fd" />
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+}
